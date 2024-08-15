@@ -1,4 +1,4 @@
-package taschenrechner;
+package malprogramm;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

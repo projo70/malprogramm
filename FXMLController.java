@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class FXMLController {
-	//fuer die Zeichenfläche
+	//fuer die Zeichenflaeche
 	@FXML private Canvas zeichenflaeche;
 	//fuer die Farbauswahl
 	@FXML private ColorPicker farbauswahl;

@@ -1,4 +1,4 @@
-package java14e;
+package malprogramm;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,17 +11,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class FXMLController {
-	//für die Zeichenfläche
+	//fuer die ZeichenflÃ¤che
 	@FXML private Canvas zeichenflaeche;
-	//für die Farbauswahl
+	//fuer die Farbauswahl
 	@FXML private ColorPicker farbauswahl;
-	//für den Grafikkontext
+	//fuer den Grafikkontext
 	private GraphicsContext gc;
-	//für die Position
+	//fuer die Position
 	private int xPos, yPos;
-	//für das Werkzeug
+	//fuer das Werkzeug
 	private int werkzeug;
-	//für die Farbe
+	//fuer die Farbe
 	private Color farbe;
 	
 	//die Methode zum Beenden
@@ -30,20 +30,20 @@ public class FXMLController {
 	}
 	
 	//die Methode setzt die Initialwerte
-	//sie wird automatisch ausgeführt
+	//wird automatisch ausgefuehrt
 	@FXML void initialize() {
-		//die Standardfarbe ist schwarz
+		//Standardfarbe ist schwarz
 		farbe = Color.BLACK;
 		farbauswahl.setValue(farbe);
 		//das Standardwerkzeug ist die Linie
 		werkzeug = 1;
-		//den Grafikkontext beschaffen
+		//Grafikkontext beschaffen
 		gc = zeichenflaeche.getGraphicsContext2D();
 		
 	}
 	
-	//für die Symbole mit dem Zeichenwerkzeug
-	//gesetzt wird ein Wert für das jeweilige Werkzeug
+	//fuer die Symbole mit dem Zeichenwerkzeug
+	//gesetzt wird ein Wert fÃ¼r das jeweilige Werkzeug
 	@FXML protected void linieKlick(ActionEvent event) {
 		werkzeug = 1;
 	}
@@ -56,25 +56,25 @@ public class FXMLController {
 		werkzeug = 3;
 	}
 	
-	//Aufgabe 3: für den gefüllten Kreis
+	//Methode fuer den gefuellten Kreis
 	@FXML protected void gefuellterKreisKlick(ActionEvent event) {
 		werkzeug = 4;
 	}
 	
-	//die Methode für das Drücken der Maustaste
+	//Methode fuer das Druecken der Maustaste
 	@FXML protected void mausGedrueckt(MouseEvent e) {
 		//die Koordinate als Startpunkt speichern
-		//aber nur, wenn die linke Maustaste gedrückt wurde
+		//wenn die linke Maustaste gedrueckt wurde
 		if (e.getButton() == MouseButton.PRIMARY) {
 			xPos = (int)e.getX();
 			yPos = (int)e.getY();
 		}
 	}
 	
-	//die Methode für das Loslassen der Maustaste
+	//Methode fuer das Loslassen der Maustaste
 	@FXML protected void mausLos(MouseEvent e) {
-		//wenn die linke Taste losgelassen wird, zeichnen wie von der alten zur aktuellen Position
-		//je nach Werkzeug wird etwas anderes gezeichnet
+		//wenn die linke Taste losgelassen wird, wird von der alten zur neuen Position gezeichnet
+		//je nach Werkzeug etwas anderes
 		if(e.getButton() == MouseButton.PRIMARY) {
 			//die Linie
 			if(werkzeug == 1)
@@ -85,41 +85,41 @@ public class FXMLController {
 			//das Rechteck
 			if(werkzeug == 3)
 				rechteck((int)(e.getX() - xPos), (int)(e.getY() - yPos));
-			//Aufgabe 3: der gefüllte Kreis
+			//der gefuellte Kreis
 			if(werkzeug == 4)
 				gefuellterKreis((int)(e.getX() - xPos), (int)(e.getY() - yPos));
 		}
 	}
 	
-	//die Methode setzt die neue Farbe
+	//Methode fuer neue Farbe
 	@FXML protected void farbAuswahlZeigen() {
 		farbe = farbauswahl.getValue();
 		gc.setStroke(farbe);
-		//Aufgabe 3: die Füllfarbe des Kreises ist die gleiche wie im Color Picker
+		//die Fuellfarbe des Kreises ist die gleiche wie im Color Picker
 		gc.setFill(farbe);
 	}
 	
 	//die Methode zeichnet ein Rechteck
-	//die Breite und Höhe werden als Parameter übergeben
+	//die Breite und Hoehe als Parameter uebergeben
 	protected void rechteck(int breite, int hoehe) {
-		//die Figur zeichnen
+		//Figur zeichnen
 		gc.strokeRect(xPos, yPos, breite, hoehe);
 	}
 	
 	//die Methode zeichnet einen Kreis
-	//die Breite und Höhe des umgebenden Rechtecks werden als Parameter übergeben
+	//die Breite und Hoehe des umgebenden Rechtecks werden als Parameter uebergeben
 	protected void kreis (int breite, int hoehe) {
 		gc.strokeOval(xPos, yPos, breite, hoehe);
 	}
 	
-	//Aufgabe 3: die Methode zeichnet einen gefüllten Kreis
-	//die Breite und Höhe des umgebenden Rechtecks werden als Parameter übergeben
+	//die Methode zeichnet einen gefuellten Kreis
+	//die Breite und Hoehe des umgebenden Rechtecks werden als Parameter uebergeben
 	protected void gefuellterKreis (int breite, int hoehe) {
 		gc.fillOval(xPos, yPos, breite, hoehe);
 	}
 	
 	//die Methode zeichnet eine Linie
-	//der Endpunkt wird als Parameter übergeben
+	//der Endpunkt wird als Parameter uebergeben
 	protected void linie(int x2, int y2) {
 		gc.strokeLine(xPos, yPos, x2, y2);
 	}
